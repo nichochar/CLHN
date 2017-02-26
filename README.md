@@ -4,6 +4,10 @@ CLHN is a very simple elixir application that allows you to read Hacker News art
 
 
 # Example
+
+[![asciicast](https://asciinema.org/a/67eapy68l75102k10i4bbyw33.png)](https://asciinema.org/a/67eapy68l75102k10i4bbyw33)
+
+
 ```
 ╭─nicholas@panix.local
 ╰─➤  ./hn top 10
