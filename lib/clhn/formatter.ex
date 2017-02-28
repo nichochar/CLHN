@@ -1,29 +1,19 @@
 defmodule Clhn.Formatter do
-  @max_columns 220
+  @max_columns 150
 
   def print_one_story(story) do
     metadata = make_first_line(story)
 
-    separator = separator_line("-")
-    full_separator = separator_line("-", true)
-
     title = make_line("(#{story["score"]}) " <> story["title"])
     url = make_line(story["url"])
-    lines = [title, url]
+    conversation = make_line(conversation_of(story))
+    lines = [title, url, conversation]
 
     print_lines lines
   end
 
-  def separator_line(separator, full \\ false)
-  def separator_line(separator, full) when full do
-    width = max_width()
-    String.duplicate(separator, width - 1)
-  end
-
-  def separator_line(separator, _) do
-    width = max_width()
-    middle = String.duplicate(separator, width - 5)
-    make_line(middle)
+  def conversation_of story do
+    "https://news.ycombinator.com/item?id=" <> Integer.to_string(story["id"])
   end
 
   def max_width do
@@ -37,14 +27,7 @@ defmodule Clhn.Formatter do
 
   def make_line fields_list do
     stuff = Enum.join(fields_list, " | ")
-    left = "| " <> stuff
-    right_padding = max_width() - String.length(left) - 1
-    right = 
-      cond do
-        right_padding < 0 -> ""
-        true -> String.pad_leading("|", right_padding)
-      end
-    left <> right
+    "| " <> stuff
   end
 
   def make_first_line story do
