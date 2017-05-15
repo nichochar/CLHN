@@ -11,21 +11,16 @@ defmodule Clhn.CLI do
   end
 
   def clean_args(argv) when length(argv) > 2 do
-    IO.puts """
-    ERROR
-    -----
-    Too many options passed.
-
-    USAGE
-    -----
-    $ ./hn [top | best | new] [count | 10]
-
-    EXAMPLES
-    --------
-    $ ./hn
-    $ ./hn top  # Default to 10
-    $ ./hn top 5
-    """
+    [:color166, "ERROR: Too many options passed.\n\n",
+     :color251, "USAGE: ./hn [top | best | new] [count | 10]\n\n",
+     :color245, """
+     EXAMPLES
+     --------
+     $ ./hn
+     $ ./hn top  # Default to 10
+     $ ./hn top 5
+     """]
+    |> Bunt.puts
     System.halt(0)
   end
 

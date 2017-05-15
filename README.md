@@ -28,12 +28,14 @@ $ ./hn [best | new | top] [count | 10]
 
 ## Installation
 
-Simply clone this repo, then build the script by running 
+Simply clone this repo, then build the script by running
+
+```bash
+mix escript.build
 ```
-mix escript.compile
-```
+
 This will output an executable erlang script hn.sh in the root directory of this repository, that you can then call directly with
-```
+```bash
 ./hn top 5
 ```
 

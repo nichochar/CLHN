@@ -8,9 +8,13 @@ defmodule Clhn.API do
 
   def get_stories {type, count} do
     url = @base_hn_url <> get_type(type)
-    IO.puts loading_message({type, count})
+
+    [:color202, :bright, loading_message({type, count})]
+    |> Bunt.puts
+
     {:ok, response} = HTTPoison.get(url)
     {:ok, best_ids} = Poison.decode(response.body)
+
     best_ids
     |> Enum.take(count)
     |> Clhn.Utils.pmap(&get_one_item/1)  # make sure we fetch them asynchronously
@@ -18,9 +22,9 @@ defmodule Clhn.API do
 
   def loading_message {type, count} do
     case type do
-      "top" -> "Fetching #{count} top stories..."
-      "new" -> "Fetching #{count} new stories..."
-      "best" -> "Fetching #{count} best stories..."
+      "top" -> "Fetching #{count} top stories from Hacker News...\n"
+      "new" -> "Fetching #{count} new stories from Hacker News...\n"
+      "best" -> "Fetching #{count} best stories from Hacker News...\n"
     end
   end
 
