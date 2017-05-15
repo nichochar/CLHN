@@ -21,6 +21,3 @@ This will output an executable erlang script hn.sh in the root directory of this
 ```bash
 ./hn top 5
 ```
-
-## ASCIINEMA
-[![asciicast](https://asciinema.org/a/67eapy68l75102k10i4bbyw33.png)](https://asciinema.org/a/67eapy68l75102k10i4bbyw33)
