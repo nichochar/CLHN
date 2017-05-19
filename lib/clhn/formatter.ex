@@ -3,7 +3,7 @@ defmodule Clhn.Formatter do
 
   def print_one_story(story) do
     title = [:orange, :bright, "(#{story["score"]}) ", story["title"]]
-    url = ["|>  ", story["url"]]
+    url = ["|>  ", Map.get(story, "url", "")]
     lines = [title, url]
 
     print_lines lines

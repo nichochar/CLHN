@@ -1,6 +1,7 @@
 defmodule Clhn.API do
 
   @base_hn_url "https://hacker-news.firebaseio.com/v0/"
+  @base_hn_comments_url "https://news.ycombinator.com/item?id="
   @item_url @base_hn_url <> "item/"
   @topstories "topstories.json"
   @beststories "beststories.json"
@@ -13,9 +14,9 @@ defmodule Clhn.API do
     |> Bunt.puts
 
     {:ok, response} = HTTPoison.get(url)
-    {:ok, best_ids} = Poison.decode(response.body)
+    {:ok, story_ids} = Poison.decode(response.body)
 
-    best_ids
+    story_ids
     |> Enum.take(count)
     |> Clhn.Utils.pmap(&get_one_item/1)  # make sure we fetch them asynchronously
   end
@@ -39,15 +40,28 @@ defmodule Clhn.API do
   def make_item_url(id) when is_integer(id) do
     @item_url <> Integer.to_string(id) <> ".json"
   end
+
   def make_item_url(id) when is_binary(id) do
     @item_url <> id <> ".json"
+  end
+
+  def build_conversation_url(item_id) when is_integer(item_id) do
+    build_conversation_url(Integer.to_string(item_id))
+  end
+
+  def build_conversation_url(item_id) do
+    @base_hn_comments_url <> item_id
   end
 
   def get_one_item(id) do
     url = make_item_url(id)
     {:ok, response} = HTTPoison.get(url)
     {:ok, body} = Poison.decode(response.body)
-    body
+
+    case Map.get(body, "url") do
+      nil -> Map.put(body, "url", build_conversation_url(id))
+      _ -> body
+    end
   end
 
 end
