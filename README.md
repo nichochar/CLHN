@@ -6,12 +6,12 @@ CLHN is an elegant elixir command line application that allows you to glance at 
 
 ## Usage
 ```
-$ ./hn [best | new | top] [count | 10]
+./hn [best | new | top] [count | 10]
 ```
 
 ## Installation
 
-Assuming you have **elixir** setup on your machine:
+Assuming you have [elixir](http://elixir-lang.org/install.html):
 
 ```bash
 git clone https://github.com/nichochar/CLHN.git
