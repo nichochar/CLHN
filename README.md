@@ -11,7 +11,7 @@ $ ./hn [best | new | top] [count | 10]
 
 ## Installation
 
-Assuming you have elixir setup on your machine, clone this repo, then build the script by running
+Assuming you have **elixir** setup on your machine:
 
 ```bash
 git clone https://github.com/nichochar/CLHN.git
