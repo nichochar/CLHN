@@ -1,6 +1,6 @@
 # CLHN
 
-CLHN is a very simple elixir command line application that allows you to glance at Hacker News.
+CLHN is an elegant elixir command line application that allows you to glance at Hacker News.
 
 ![screenshot](assets/screenshot.png)
 
