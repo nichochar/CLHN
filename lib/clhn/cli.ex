@@ -1,5 +1,5 @@
 defmodule Clhn.CLI do
-  @defaultcount 10
+  @defaultcount 15
   @defaulttype "top"
 
   def parse_args argv do
