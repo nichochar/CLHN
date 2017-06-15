@@ -13,12 +13,19 @@ defmodule Clhn.API do
     [:color202, :bright, loading_message({type, count})]
     |> Bunt.puts
 
-    {:ok, response} = HTTPoison.get(url)
+    handle_response(HTTPoison.get(url), count)
+  end
+
+  def handle_response({:ok, response}, count) do
     {:ok, story_ids} = Poison.decode(response.body)
 
     story_ids
     |> Enum.take(count)
     |> Clhn.Utils.pmap(&get_one_item/1)  # make sure we fetch them asynchronously
+  end
+
+  def handle_response({:error, _}, _) do
+    :error
   end
 
   def loading_message {type, count} do
